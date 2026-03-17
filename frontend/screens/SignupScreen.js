@@ -60,7 +60,7 @@ const SignupScreen = ({ navigation }) => {
         
         <View style={[styles.formSection, isLargeScreen ? styles.formSectionLarge : styles.formSectionSmall]}>
           <ScrollView contentContainerStyle={[styles.scrollContent, !isLargeScreen && styles.scrollContentSmall]} showsVerticalScrollIndicator={false}>
-            <View style={styles.formWrapper}>
+            <View style={[styles.formWrapper, !isLargeScreen && styles.floatingModal]}>
 
               <View style={styles.header}>
                 <Text style={styles.title}>Create an account</Text>
@@ -111,55 +111,64 @@ const SignupScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.white },
+  container: { flex: 1, backgroundColor: '#f8fafc' },
   layout: { flex: 1 },
-  layoutLarge: { flexDirection: 'row-reverse' }, // Image on the right for signup
+  layoutLarge: { flexDirection: 'row-reverse' },
   layoutSmall: { flexDirection: 'column' },
   
   imageSection: { position: 'relative', backgroundColor: COLORS.primaryDark },
   imageSectionLarge: { flex: 1.2 },
-  imageSectionSmall: { width: '100%', height: 320 },
+  imageSectionSmall: { width: '100%', height: 280 },
   
   heroImage: { width: '100%', height: '100%', resizeMode: 'cover' },
   imageOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(15, 23, 42, 0.4)',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     padding: 60,
   },
   imageOverlaySmall: {
-    padding: 30,
+    padding: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 60,
   },
   
   branding: { maxWidth: 500 },
-  brandingSmall: { alignItems: 'center' },
-  logoRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 16 },
-  whiteLogoPlaceholder: { width: 48, height: 48, borderRadius: 12, backgroundColor: COLORS.white, alignItems: 'center', justifyContent: 'center', marginRight: 16 },
-  whiteLogoText: { color: COLORS.primary, fontSize: 20, fontWeight: '900' },
-  brandTitle: { color: COLORS.white, fontSize: 48, fontWeight: '800', textShadowColor: 'rgba(0,0,0,0.3)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 10 },
-  brandTitleSmall: { color: COLORS.white, fontSize: 36, fontWeight: '800', textShadowColor: 'rgba(0,0,0,0.3)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 10 },
-  brandSubtitle: { color: 'rgba(255,255,255,0.9)', fontSize: 20, lineHeight: 30, fontWeight: '500', textShadowColor: 'rgba(0,0,0,0.3)', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 5 },
+  brandingSmall: { alignItems: 'center', marginTop: -20 },
+  logoRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 12 },
+  whiteLogoPlaceholder: { width: 44, height: 44, borderRadius: 12, backgroundColor: COLORS.white, alignItems: 'center', justifyContent: 'center', marginRight: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3 },
+  whiteLogoText: { color: COLORS.primary, fontSize: 18, fontWeight: '900' },
+  brandTitle: { color: COLORS.white, fontSize: 44, fontWeight: '800', textAlign: 'center', textShadowColor: 'rgba(0,0,0,0.2)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 8 },
+  brandTitleSmall: { color: COLORS.white, fontSize: 32, fontWeight: '800', textAlign: 'center', textShadowColor: 'rgba(0,0,0,0.3)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 10 },
+  brandSubtitle: { color: 'rgba(255,255,255,0.9)', fontSize: 18, lineHeight: 28, fontWeight: '500', textAlign: 'center', textShadowColor: 'rgba(0,0,0,0.2)', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 5 },
   
-  formSection: { backgroundColor: COLORS.white },
-  formSectionLarge: { flex: 1 },
-  formSectionSmall: { flex: 1, marginTop: -40, borderTopLeftRadius: 40, borderTopRightRadius: 40, overflow: 'hidden', elevation: 15, shadowColor: '#000', shadowOffset: { width: 0, height: -5 }, shadowOpacity: 0.1, shadowRadius: 10 },
+  formSection: { flex: 1 },
+  formSectionLarge: { backgroundColor: COLORS.white },
+  formSectionSmall: { backgroundColor: 'transparent', marginTop: -60 },
   
-  scrollContent: { flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: SPACING.xl },
-  scrollContentSmall: { justifyContent: 'flex-start', paddingTop: SPACING.xl * 1.5 },
+  scrollContent: { flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: SPACING.lg },
+  scrollContentSmall: { justifyContent: 'flex-start' },
   
   formWrapper: { width: '100%', maxWidth: 400 },
+  floatingModal: {
+    backgroundColor: COLORS.white,
+    padding: 32,
+    borderRadius: 32,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.1,
+    shadowRadius: 20,
+    elevation: 8,
+  },
   
   header: { marginBottom: 32 },
-  title: { fontSize: 32, fontWeight: '800', color: COLORS.text, marginBottom: 8, letterSpacing: -0.5 },
-  subtitle: { fontSize: 16, color: COLORS.textLight, fontWeight: '500' },
+  title: { fontSize: 28, fontWeight: '800', color: COLORS.text, marginBottom: 8, letterSpacing: -0.5 },
+  subtitle: { fontSize: 15, color: COLORS.textLight, fontWeight: '500' },
   inputGroup: { marginBottom: 24 },
   submitButton: { paddingVertical: 16, borderRadius: 12 },
   footer: { flexDirection: 'row', justifyContent: 'center', marginTop: 32 },
-  footerText: { color: COLORS.textLight, fontSize: 15 },
-  linkText: { color: COLORS.primary, fontSize: 15, fontWeight: '700' },
+  footerText: { color: COLORS.textLight, fontSize: 14 },
+  linkText: { color: COLORS.primary, fontSize: 14, fontWeight: '700' },
 });
 
 export default SignupScreen;
